@@ -5,14 +5,20 @@ import (
 	"net/http"
 )
 
-//Book type with Name, Title, and ISBN
+//Book type with Title, Author, and ISBN
 type Book struct {
-	//define the book
+	Title string
+	Author string
+	ISBN string
 }
 
 //ToJSON to be used for marshalling of Book type
 func (b Book) ToJSON() []byte {
-	return nil
+	ToJSON, err := json.Marshal(b)
+	if err != nil {
+		panic(err)
+	}
+	return ToJSON
 }
 
 //FromJSON to be used for unmarshalling of Book type
