@@ -7,9 +7,9 @@ import (
 
 //Book type with Title, Author, and ISBN
 type Book struct {
-	Title string
-	Author string
-	ISBN string
+	Title string `json:"title"`
+	Author string `json:"author"`
+	ISBN string `json:"isbn"`
 }
 
 //ToJSON to be used for marshalling of Book type
@@ -23,7 +23,12 @@ func (b Book) ToJSON() []byte {
 
 //FromJSON to be used for unmarshalling of Book type
 func FromJSON(data []byte) Book {
-	return Book{}
+	book := Book{}
+	err := json.Unmarshal(data, &book)
+	if err != nil {
+		panic(err)
+	}
+	return book
 }
 
 //BooksHandleFunc to be used http.HandleFunc for Book API
