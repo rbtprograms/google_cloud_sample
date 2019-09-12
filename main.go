@@ -14,7 +14,6 @@ func main() {
 	http.ListenAndServe(port(), nil)
 }
 
-//gets the port
 func port() string {
 	port := os.Getenv("PORT")
 	if port == "" {
