@@ -1,16 +1,17 @@
 package main
 
 import (
-	"fmt"
-	"os"
-	"net/http"
 	"api"
+	"fmt"
+	"net/http"
+	"os"
 )
 
 func main() {
 	http.HandleFunc("/", index)
 	http.HandleFunc("/api/echo", echo)
 	http.HandleFunc("/api/books", api.BooksHandleFunc)
+	http.HandleFunc("/api/book/", api.BookHandleFunc)
 	http.ListenAndServe(port(), nil)
 }
 
