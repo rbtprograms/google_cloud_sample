@@ -67,6 +67,9 @@ func BookHandleFunc(w http.ResponseWriter, r *http.Request) {
 		} else {
 			w.WriteHeader(http.StatusNotFound)
 		}
+	case http.MethodDelete:
+		DeleteBook(isbn)
+		w.WriteHeader(http.StatusOK)
 	}
 
 }
@@ -135,3 +138,14 @@ func UpdateBook(isbn string, book Book) bool {
 	return false
 }
 
+//DeleteBook deletes a book
+func DeleteBook(isbn string) {
+	var index int
+	for i, v := range Books {
+		if v.ISBN == isbn {
+			index = i
+			break
+		}
+	}
+	Books = append(Books[0:index], Books[index:]...)
+}
