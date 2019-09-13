@@ -70,6 +70,9 @@ func BookHandleFunc(w http.ResponseWriter, r *http.Request) {
 	case http.MethodDelete:
 		DeleteBook(isbn)
 		w.WriteHeader(http.StatusOK)
+	default:
+		w.WriteHeader(http.StatusBadRequest)
+		w.Write([]byte("Unsupported request method"))
 	}
 
 }
