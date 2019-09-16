@@ -7,6 +7,10 @@ import (
 	"os"
 )
 
+//enter the command before you build docker image
+//GOOS=linux GOARCH=armd64 go build
+//builds binary for linux
+
 func main() {
 	http.HandleFunc("/", index)
 	http.HandleFunc("/api/echo", echo)
