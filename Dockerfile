@@ -1,13 +1,13 @@
-FROM golang:1.13.0-alpine
+FROM alpine:3.5
 LABEL robert thompson
 
-ENV SOURCES /go/src/google_cloud_sample
+ENV SOURCES /app/google_cloud_sample
 
-COPY . ${SOURCES}
+COPY ./google_cloud_sample ${SOURCES}
 
-RUN cd ${SOURCES} && CGO_ENABLED=0 go install
+RUN chmod +x /app/google_cloud_sample
 
 ENV PORT 8080
 EXPOSE 8080
 
-ENTRYPOINT [ "google_cloud_sample" ]
+ENTRYPOINT /app/google_cloud_sample
