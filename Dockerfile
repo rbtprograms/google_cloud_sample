@@ -1,4 +1,4 @@
-FROM alpine:3.5
+FROM alpine:latest
 LABEL robert thompson
 
 ENV SOURCES /app/google_cloud_sample
