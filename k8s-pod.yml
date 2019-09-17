@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: google-cloud-sample
+  labels:
+    language: go
+    env: test
+spec:
+  containers:
+    - name: google-cloud-sample
+      image: google_cloud_sample:1.0.2
+      ports:
+        - containerPort: 8080
+          protocol: TCP
