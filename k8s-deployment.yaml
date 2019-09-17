@@ -1,0 +1,43 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: google-cloud-sample
+  labels:
+    app: google-cloud-sample
+spec:
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        app: google-cloud-sample
+        tier: service
+    spec:
+      containers:
+      - name: google-cloud-sample
+        image: "google_cloud_sample:1.0.2"
+        ports:
+        - containerPort: 8080
+        env:
+        - name: PORT
+          value: "8080"
+        resources:
+          requests:
+            memory: "64Mi"
+            cpu: "125m"
+          limits:
+            memory: "128Mi"
+            cpu: "250m"
+        # checks to see if pods are ready for traffic
+        readinessProbe:
+          httpGet:
+            path: /
+            port: 8080
+          initialDelaySeconds: 5
+          timeoutSeconds: 5
+        # kills are restarts unhealthy pods
+        livenessProbe:
+          httpGet:
+            path: /
+            port: 8080
+          initialDelaySeconds: 5
+          timeoutSeconds: 5
